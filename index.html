@@ -1,413 +1,424 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BangerBoy — The Stock Market for Viral Content</title>
-    <meta name="description" content="Invest in the hype. Own the moment. BangerBoy turns viral posts into tradable assets." />
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HSC7BW5D8V"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BangerBoy — The Stock Market for Viral Content</title>
+  <meta name="description"
+    content="Invest in the hype. Own the moment. BangerBoy turns viral posts into tradable assets." />
 
-      gtag('config', 'G-HSC7BW5D8V');
-    </script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-HSC7BW5D8V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              display: ["Space Grotesk", "sans-serif"],
-              body: ["Inter", "sans-serif"],
-            },
-            colors: {
-              bb: {
-                yellow: "#FBBE2F",
-                red: "#E42328",
-                blue: "#016FB9",
-                dark: "#0F0F0F",
-                muted: "#9CA3AF",
-              },
-            },
-            boxShadow: {
-              glow: "0 0 30px rgba(251, 190, 47, 0.35)",
-              neon: "0 0 25px rgba(228, 35, 40, 0.35)",
-            },
-            backgroundImage: {
-              "hero-grid": "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.08) 1px, transparent 0)",
-              "glass-gradient": "linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
-              "cta-gradient": "linear-gradient(120deg, #FBBE2F, #E42328)",
-              "card-glow": "linear-gradient(135deg, rgba(1,111,185,0.2), rgba(228,35,40,0.2))",
-            },
-            keyframes: {
-              floaty: {
-                "0%, 100%": { transform: "translateY(0)" },
-                "50%": { transform: "translateY(-10px)" },
-              },
-              pulseSoft: {
-                "0%, 100%": { opacity: "0.6" },
-                "50%": { opacity: "1" },
-              },
-            },
-            animation: {
-              floaty: "floaty 6s ease-in-out infinite",
-              pulseSoft: "pulseSoft 4s ease-in-out infinite",
+    gtag('config', 'G-HSC7BW5D8V');
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ["Kenyan Coffee", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+          },
+          colors: {
+            bb: {
+              yellow: "#FBBE2F",
+              red: "#E42328",
+              blue: "#016FB9",
+              dark: "#0F0F0F",
+              muted: "#9CA3AF",
             },
           },
+          boxShadow: {
+            glow: "0 0 30px rgba(251, 190, 47, 0.35)",
+            neon: "0 0 25px rgba(228, 35, 40, 0.35)",
+          },
+          backgroundImage: {
+            "glass-gradient": "linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02))",
+          },
+          keyframes: {
+            floaty: {
+              "0%, 100%": { transform: "translateY(0)" },
+              "50%": { transform: "translateY(-10px)" },
+            },
+            pulseSoft: {
+              "0%, 100%": { opacity: "0.6" },
+              "50%": { opacity: "1" },
+            },
+          },
+          animation: {
+            floaty: "floaty 6s ease-in-out infinite",
+            pulseSoft: "pulseSoft 4s ease-in-out infinite",
+          },
         },
-      };
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      html {
-        scroll-behavior: smooth;
+      },
+    };
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: "Kenyan Coffee";
+      src: url("./fonts/KenyanCoffee-Regular.woff") format("woff");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: "Kenyan Coffee";
+      src: url("./fonts/KenyanCoffee-Bold.woff") format("woff");
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    .glass {
+      background: rgba(15, 15, 15, 0.7);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .glass-light {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .noise::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+      mix-blend-mode: overlay;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .alive {
+      animation: alive 4.5s ease-in-out infinite;
+      box-shadow: 0 0 0 rgba(251, 190, 47, 0.0);
+    }
+
+    @keyframes alive {
+
+      0%,
+      100% {
+        transform: translateY(0);
+        box-shadow: 0 0 0 rgba(251, 190, 47, 0.0);
       }
-      .glass {
-        background: rgba(15, 15, 15, 0.7);
-        backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+
+      50% {
+        transform: translateY(-6px);
+        box-shadow: 0 0 25px rgba(251, 190, 47, 0.15);
       }
-      .glass-light {
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(18px);
-        border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .number-pop {
+      animation: number-pop 0.35s ease-in-out;
+    }
+
+    @keyframes number-pop {
+      0% {
+        transform: translateY(0) scale(1);
       }
-      .noise::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
-        mix-blend-mode: overlay;
-        opacity: 0.35;
-        pointer-events: none;
+
+      50% {
+        transform: translateY(-2px) scale(1.05);
       }
-    </style>
-  </head>
-  <body class="bg-bb-dark text-white font-body">
-    <div class="relative min-h-screen overflow-hidden noise">
-      <div class="absolute inset-0 bg-hero-grid bg-[length:28px_28px] opacity-30"></div>
-      <div class="absolute -top-40 -right-32 h-96 w-96 rounded-full bg-bb-red/30 blur-[120px]"></div>
-      <div class="absolute -bottom-48 -left-32 h-[28rem] w-[28rem] rounded-full bg-bb-blue/25 blur-[140px]"></div>
 
-      <header class="relative z-10">
-        <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
-          <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-2xl bg-gradient-to-br from-bb-yellow to-bb-red shadow-glow"></div>
-            <div>
-              <p class="font-display text-lg leading-none">BangerBoy</p>
-              <p class="text-xs text-bb-muted">The Stock Market for Viral Content</p>
-            </div>
-          </div>
-          <div class="hidden items-center gap-6 text-sm text-bb-muted md:flex">
-            <a href="#how" class="hover:text-white">How it works</a>
-            <a href="#why" class="hover:text-white">Why it wins</a>
-            <a href="#social" class="hover:text-white">Early bangers</a>
-            <a href="#faq" class="hover:text-white">FAQ</a>
-          </div>
-          <a
-            href="https://t.me/bangerboyofficial"
-            target="_blank"
-            rel="noopener"
-            class="hidden rounded-xl bg-cta-gradient px-5 py-2 text-sm font-semibold text-black shadow-glow transition hover:-translate-y-0.5 hover:shadow-neon md:inline-flex"
-            >Join Telegram</a
-          >
-        </nav>
-      </header>
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+  </style>
+</head>
 
-      <main class="relative z-10">
-        <section class="mx-auto max-w-6xl px-6 pb-24 pt-14 md:pt-20">
-          <div class="grid items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
-            <div>
-              <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.2em] text-bb-yellow">
-                Invest in the hype. Own the moment.
-              </div>
-              <h1 class="mt-6 font-display text-4xl leading-tight md:text-6xl">
-                Own the next viral moment.
-              </h1>
-              <p class="mt-4 text-lg text-bb-muted md:text-xl">
-                BangerBoy turns viral posts into tradable assets — the NASDAQ of social media. Buy early, ride the wave, and cash out when the hype explodes.
-              </p>
-              <div class="mt-8 flex flex-wrap gap-4">
-                <a
-                  id="cta-hero"
-                  href="https://t.me/bangerboyofficial"
-                  target="_blank"
-                  rel="noopener"
-                  class="rounded-xl bg-cta-gradient px-6 py-3 font-semibold text-black shadow-glow transition hover:-translate-y-0.5 hover:shadow-neon inline-flex items-center justify-center"
-                >
-                  Join Telegram
-                </a>
-                <button class="rounded-xl border border-white/15 px-6 py-3 font-semibold text-white transition hover:border-bb-yellow hover:text-bb-yellow">
-                  See how it works
-                </button>
-              </div>
-              <div class="mt-10 flex flex-wrap gap-6 text-sm text-bb-muted">
-                <div>
-                  <p class="font-display text-2xl text-white">2% fee</p>
-                  <p>Creators + Pioneers get paid</p>
-                </div>
-                <div>
-                  <p class="font-display text-2xl text-white">24/7</p>
-                  <p>The meme market never sleeps</p>
-                </div>
-                <div>
-                  <p class="font-display text-2xl text-white">0.1%</p>
-                  <p>Pioneer fees forever</p>
-                </div>
-              </div>
-            </div>
+<body class="bg-bb-dark text-white font-body">
+  <div class="relative min-h-screen overflow-hidden noise">
+    <div class="absolute inset-0 bg-bb-yellow/10 opacity-20"></div>
+    <div class="absolute -top-40 -right-32 h-96 w-96 rounded-full bg-bb-red/30 blur-[120px]"></div>
+    <div class="absolute -bottom-48 -left-32 h-[28rem] w-[28rem] rounded-full bg-bb-blue/25 blur-[140px]"></div>
 
-            <div class="space-y-5">
-              <div class="glass rounded-3xl p-6 shadow-lg">
-                <div class="flex items-center justify-between">
-                  <div>
-                    <p class="text-sm text-bb-muted">Trending banger</p>
-                    <p class="font-display text-2xl">@ApeCapital</p>
-                  </div>
-                  <span class="rounded-full bg-bb-yellow/20 px-3 py-1 text-xs text-bb-yellow">Graduating</span>
-                </div>
-                <div class="mt-4 rounded-2xl bg-card-glow p-4">
-                  <p class="text-sm text-bb-muted">"Your tweet just hit $50k MC."</p>
-                  <p class="mt-3 text-lg font-semibold">$BANGR</p>
-                  <p class="text-sm text-bb-muted">Market cap</p>
-                  <p class="font-display text-3xl">$51,240</p>
-                </div>
-                <div class="mt-4 flex items-center justify-between text-sm">
-                  <div>
-                    <p class="text-bb-muted">24h P&amp;L</p>
-                    <p class="text-bb-yellow">+128%</p>
-                  </div>
-                  <button class="rounded-xl border border-bb-yellow/40 px-4 py-2 text-bb-yellow">Ape in</button>
-                </div>
-              </div>
-              <div class="glass-light rounded-3xl p-6 shadow-lg animate-floaty">
-                <p class="text-sm text-bb-muted">Live sentiment</p>
-                <p class="mt-2 font-display text-3xl">Clout → Capital</p>
-                <div class="mt-4 flex items-center gap-2 text-sm">
-                  <span class="rounded-full bg-bb-red/30 px-3 py-1">🔥 #BangerBoy</span>
-                  <span class="rounded-full bg-bb-blue/30 px-3 py-1">🚀 Send it</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="how" class="mx-auto max-w-6xl px-6 pb-24">
-          <div class="glass rounded-3xl p-8 md:p-12">
-            <div class="flex flex-wrap items-center justify-between gap-6">
-              <div>
-                <p class="text-sm uppercase tracking-[0.3em] text-bb-yellow">How it works</p>
-                <h2 class="mt-3 font-display text-3xl md:text-4xl">Find a banger. Invest early. Profit as it trends.</h2>
-              </div>
-              <div class="text-bb-muted">
-                Paste a link or keyword. If it doesn't exist, be the Pioneer and mint it.
-              </div>
-            </div>
-            <div class="mt-10 grid gap-6 md:grid-cols-3">
-              <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
-                <p class="text-sm text-bb-muted">Step 1</p>
-                <p class="mt-2 font-display text-2xl">Spot the post</p>
-                <p class="mt-2 text-sm text-bb-muted">Drop a link or keyword. We surface bangers and authors instantly.</p>
-              </div>
-              <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
-                <p class="text-sm text-bb-muted">Step 2</p>
-                <p class="mt-2 font-display text-2xl">Ape in early</p>
-                <p class="mt-2 text-sm text-bb-muted">Be the Pioneer, mint the banger, and lock in lifetime fees.</p>
-              </div>
-              <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
-                <p class="text-sm text-bb-muted">Step 3</p>
-                <p class="mt-2 font-display text-2xl">Ride the hype</p>
-                <p class="mt-2 text-sm text-bb-muted">Trade on the bonding curve until it graduates to a DEX.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="why" class="mx-auto max-w-6xl px-6 pb-24">
-          <div class="grid gap-8 md:grid-cols-2">
-            <div class="glass rounded-3xl p-8">
-              <p class="text-sm uppercase tracking-[0.3em] text-bb-yellow">Why creators win</p>
-              <h3 class="mt-3 font-display text-3xl">Turn views into recurring royalties.</h3>
-              <p class="mt-4 text-bb-muted">
-                Creators earn 0.9% of every trade forever. Your viral moments become long-term income, not just a fleeting spike.
-              </p>
-              <ul class="mt-6 space-y-2 text-sm text-bb-muted">
-                <li>Royalties on every trade</li>
-                <li>Auto-generated wallet on signup</li>
-                <li>Clout becomes capital — instantly</li>
-              </ul>
-            </div>
-            <div class="glass rounded-3xl p-8">
-              <p class="text-sm uppercase tracking-[0.3em] text-bb-yellow">Why fans win</p>
-              <h3 class="mt-3 font-display text-3xl">Be more than a spectator — own the moment.</h3>
-              <p class="mt-4 text-bb-muted">
-                Invest in the memes you love before they blow up. Early hype = early profits, plus a community status flex.
-              </p>
-              <ul class="mt-6 space-y-2 text-sm text-bb-muted">
-                <li>Buy & sell instantly</li>
-                <li>Portfolio P&amp;L at a glance</li>
-                <li>Pioneer rewards for discovery</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        <section id="social" class="mx-auto max-w-6xl px-6 pb-24">
-          <div class="flex flex-wrap items-center justify-between gap-6">
-            <div>
-              <p class="text-sm uppercase tracking-[0.3em] text-bb-yellow">Early bangers</p>
-              <h2 class="mt-3 font-display text-3xl md:text-4xl">The vibe: social media meets trading desk.</h2>
-            </div>
-            <div class="text-bb-muted">Glassmorphism, neon glow, and a feed that never sleeps.</div>
-          </div>
-          <div class="mt-10 grid gap-6 md:grid-cols-3">
-            <div class="glass-light rounded-3xl p-6">
-              <p class="text-xs text-bb-muted">@MemeQueen · 3m ago</p>
-              <p class="mt-3 font-semibold">"Your favorite meme just hit a $50k market cap."</p>
-              <div class="mt-4 flex items-center justify-between text-sm">
-                <span class="text-bb-yellow">$MEEM +74%</span>
-                <span class="text-bb-muted">MC $52,100</span>
-              </div>
-            </div>
-            <div class="glass-light rounded-3xl p-6">
-              <p class="text-xs text-bb-muted">@ClipKing · 12m ago</p>
-              <p class="mt-3 font-semibold">"Banger of the week. Early investors 10x."</p>
-              <div class="mt-4 flex items-center justify-between text-sm">
-                <span class="text-bb-yellow">$CLIP +210%</span>
-                <span class="text-bb-muted">MC $88,900</span>
-              </div>
-            </div>
-            <div class="glass-light rounded-3xl p-6">
-              <p class="text-xs text-bb-muted">@ApeCapital · 1h ago</p>
-              <p class="mt-3 font-semibold">"Clout is the new currency. We are the mint."</p>
-              <div class="mt-4 flex items-center justify-between text-sm">
-                <span class="text-bb-yellow">$BANGR +128%</span>
-                <span class="text-bb-muted">MC $51,240</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="mx-auto max-w-6xl px-6 pb-24">
-          <div class="grid gap-6 md:grid-cols-4">
-            <div class="glass rounded-3xl p-6">
-              <p class="text-sm text-bb-muted">Creators</p>
-              <p class="mt-3 font-display text-xl">Royalties forever</p>
-              <p class="mt-2 text-sm text-bb-muted">Turn virality into a sustainable income stream.</p>
-            </div>
-            <div class="glass rounded-3xl p-6">
-              <p class="text-sm text-bb-muted">Fans</p>
-              <p class="mt-3 font-display text-xl">Profit on hype</p>
-              <p class="mt-2 text-sm text-bb-muted">Invest early, flex your taste, win the upside.</p>
-            </div>
-            <div class="glass rounded-3xl p-6">
-              <p class="text-sm text-bb-muted">Traders</p>
-              <p class="mt-3 font-display text-xl">New alpha market</p>
-              <p class="mt-2 text-sm text-bb-muted">Speculate on culture, not just charts.</p>
-            </div>
-            <div class="glass rounded-3xl p-6">
-              <p class="text-sm text-bb-muted">Investors</p>
-              <p class="mt-3 font-display text-xl">The next asset class</p>
-              <p class="mt-2 text-sm text-bb-muted">The NASDAQ of social media in the making.</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="faq" class="mx-auto max-w-5xl px-6 pb-24">
-          <div class="glass rounded-3xl p-8 md:p-12">
-            <p class="text-sm uppercase tracking-[0.3em] text-bb-yellow">FAQ</p>
-            <h2 class="mt-3 font-display text-3xl md:text-4xl">Everything you need to ape in.</h2>
-            <div class="mt-8 space-y-4">
-              <details class="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <summary class="cursor-pointer font-semibold">How do I invest?</summary>
-                <p class="mt-2 text-sm text-bb-muted">Paste a post link, choose an amount, and buy shares directly on BangerBoy.</p>
-              </details>
-              <details class="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <summary class="cursor-pointer font-semibold">What if the post doesn't exist yet?</summary>
-                <p class="mt-2 text-sm text-bb-muted">Be the Pioneer. Mint the banger and earn 0.1% of all future trading fees.</p>
-              </details>
-              <details class="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <summary class="cursor-pointer font-semibold">Where do creator royalties come from?</summary>
-                <p class="mt-2 text-sm text-bb-muted">Every trade charges a 2% fee — 0.9% goes to creators, 0.1% to pioneers, 1% to the platform.</p>
-              </details>
-              <details class="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <summary class="cursor-pointer font-semibold">When does a banger graduate to a DEX?</summary>
-                <p class="mt-2 text-sm text-bb-muted">Once it hits a market cap threshold (think $50k+), liquidity migrates to a DEX for bigger volume.</p>
-              </details>
-              <details class="rounded-2xl border border-white/10 bg-white/5 p-4">
-                <summary class="cursor-pointer font-semibold">How do wallets work?</summary>
-                <p class="mt-2 text-sm text-bb-muted">We auto-generate a wallet on signup. You can export keys anytime and withdraw instantly.</p>
-              </details>
-            </div>
-          </div>
-        </section>
-
-        <section id="waitlist" class="mx-auto max-w-6xl px-6 pb-28">
-          <div class="relative overflow-hidden rounded-3xl bg-cta-gradient p-10 text-black md:p-14">
-            <div class="absolute -right-12 -top-16 h-48 w-48 rounded-full bg-white/30 blur-3xl"></div>
-            <div class="relative z-10 grid gap-8 md:grid-cols-[1.2fr_0.8fr]">
-              <div>
-                <p class="text-xs uppercase tracking-[0.3em]">Join the Telegram</p>
-                <h2 class="mt-3 font-display text-3xl md:text-4xl">Be first. Be bold. Be rewarded.</h2>
-                <p class="mt-4 text-sm text-black/80">
-                  The alpha drops in our channel first. Get updates, drops, and pioneer chatter.
-                </p>
-              </div>
-              <div class="grid content-start gap-4">
-                <a
-                  id="cta-footer"
-                  href="https://t.me/bangerboyofficial"
-                  target="_blank"
-                  rel="noopener"
-                  class="rounded-xl bg-black px-4 py-3 text-center text-sm font-semibold text-white transition hover:-translate-y-0.5"
-                >
-                  Join @bangerboyofficial
-                </a>
-                <p class="text-xs text-black/70">No spam. Just alpha.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer class="relative z-10 border-t border-white/10">
-        <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-8 text-sm text-bb-muted">
-          <p>© 2026 BangerBoy. Culture is the new asset class.</p>
-          <div class="flex gap-4">
-            <a href="#" class="hover:text-white">Privacy Policy</a>
-            <a href="#" class="hover:text-white">Terms</a>
-            <a href="#" class="hover:text-white">Fees</a>
+    <header class="relative z-10">
+      <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-6">
+        <div class="flex items-center gap-3">
+          <img src="./logo.png" alt="bangerboy logo" class="h-10 w-10 inline-block" />
+          <div>
+            <p class="font-display text-lg leading-none mb-1 tracking-wider">BangerBoy</p>
+            <p class="text-xs text-bb-muted">The Stock Market for Viral Content</p>
           </div>
         </div>
-      </footer>
-    </div>
+        <a href="https://t.me/bangerboyofficial" target="_blank" rel="noopener"
+          class="hidden rounded-lg bg-bb-yellow px-5 py-2 text-sm font-semibold text-black shadow-glow transition hover:-translate-y-0.5 hover:shadow-neon md:inline-flex">Join
+          Telegram</a>
+      </nav>
+    </header>
 
-    <script>
-      const confettiBurst = () => {
-        confetti({
-          particleCount: 120,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ["#FBBE2F", "#E42328", "#016FB9", "#FFFFFF"],
-        });
+    <main class="relative z-10">
+      <section class="mx-auto max-w-6xl px-6 pb-24 pt-14 md:pt-20">
+        <div class="grid items-center gap-12 md:grid-cols-[1.1fr_0.9fr]">
+          <div>
+            <div
+              class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs uppercase tracking-[0.2em] text-bb-yellow">
+              Invest in the hype. Own the moment.
+            </div>
+            <h1 class="mt-6 font-display text-5xl leading-tight md:text-7xl">
+              Own the next viral moment.
+            </h1>
+            <p class="mt-4 text-lg text-bb-muted md:text-xl">
+              The NASDAQ of social media — BangerBoy turns viral posts into tradable assets.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-4">
+              <a id="cta-hero" href="https://t.me/bangerboyofficial" target="_blank" rel="noopener"
+                class="rounded-lg bg-bb-yellow px-6 py-3 font-semibold text-black shadow-glow transition hover:-translate-y-0.5 hover:shadow-neon inline-flex items-center justify-center">
+                Join Telegram
+              </a>
+            </div>
+            <div class="mt-10 flex flex-wrap gap-6 text-sm text-bb-muted">
+              <div>
+                <p class="font-display text-2xl text-white">2% fee</p>
+                <p>Creators + Pioneers get paid</p>
+              </div>
+              <div>
+                <p class="font-display text-2xl text-white">1 Post → 1 Asset</p>
+                <p>No Duplicates. No Liquidity Fragmentation.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-5">
+            <div class="rounded-3xl border border-bb-red/30 bg-bb-red/5 p-6 shadow-lg">
+              <div class="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p class="text-lg uppercase tracking-[0.1em] font-display text-bb-yellow">Post → Asset</p>
+                  <p class="text-sm text-bb-muted">Don’t just be an audience, own a piece of it.</p>
+                </div>
+              </div>
+              <div class="mt-6">
+                <div class="relative">
+                  <div
+                    class="absolute left-3 right-3 top-2 bottom-2 -z-10 translate-y-4 rounded-2xl border border-white/5 bg-bb-dark">
+                  </div>
+                  <div
+                    class="absolute left-6 right-6 top-4 bottom-4 -z-20 translate-y-8 rounded-2xl border border-white/5 bg-bb-dark">
+                  </div>
+                  <div class="rounded-2xl border border-white/10 bg-bb-dark/90 p-5 alive">
+                    <div class="flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <div class="h-10 w-10 rounded-full bg-bb-blue/20 ring-1 ring-white/10"></div>
+                        <div>
+                          <p class="text-sm font-semibold">Elon Musk</p>
+                          <p class="text-xs text-bb-muted">@elonmusk · 43m</p>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mt-3 text-base font-semibold">“Let that sink in.”</p>
+                    <div class="mt-4 flex flex-wrap items-center gap-2 text-xs text-bb-muted">
+                      <span class="rounded-full bg-white/10 px-2 py-1">Ticker: <b>$SINK</b></span>
+                    </div>
+                    <div
+                      class="mt-4 flex items-center justify-between border-y border-white/5 py-3 text-xs text-bb-muted">
+                      <div class="flex items-center gap-2">
+                        <span class="inline-block h-2 w-2 rounded-full bg-bb-blue"></span>
+                        <span>8.1k likes</span>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <span class="inline-block h-2 w-2 rounded-full bg-bb-yellow"></span>
+                        <span>410 reposts</span>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <span class="inline-block h-2 w-2 rounded-full bg-bb-red"></span>
+                        <span>6.7K replies</span>
+                      </div>
+                    </div>
+                    <div class="mt-4 grid gap-3 md:grid-cols-3">
+                      <div class="p-1">
+                        <p class="text-xs text-bb-muted">Market cap</p>
+                        <p class="font-display text-3xl text-green-400" id="mc-value" data-mc="154000">$154,000</p>
+                      </div>
+                      <div class="p-1">
+                        <p class="text-xs text-bb-muted">Holders</p>
+                        <p class="font-display text-2xl text-white" id="holders-value" data-holders="1284">1,284</p>
+                      </div>
+                      <div class="p-1">
+                        <p class="text-xs text-bb-muted">Volume</p>
+                        <p class="font-display text-2xl text-white" id="volume-value" data-volume="92000">$192,000</p>
+                      </div>
+                    </div>
+                    <div class="mt-4 flex items-center justify-between text-xs text-bb-muted">
+                      <span>Every post is a tradable asset.</span>
+                      <span class="text-bb-yellow">Be early, ride the hype.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="how" class="mx-auto max-w-6xl px-6 pb-24">
+        <div class="glass rounded-3xl p-8 md:p-12">
+          <div class="flex flex-wrap items-center justify-between gap-6">
+            <div>
+              <p class="text-sm uppercase tracking-[0.3em] text-bb-yellow">How it works</p>
+              <h2 class="mt-3 font-display text-3xl md:text-4xl">Find a banger. Invest early. Profit as it trends.</h2>
+              <p class="mt-1 text-white/60">BangerBoy creates a liquid market for social capital, allowing creators
+                monetize & fans invest in trends</p>
+            </div>
+          </div>
+          <div class="mt-10 grid gap-6 md:grid-cols-3">
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <p class="text-sm text-bb-muted">Step 1</p>
+              <p class="mt-2 font-display text-2xl">Spot the post</p>
+              <p class="mt-2 text-sm text-bb-muted">Find a viral post you want to invest in.
+              </p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <p class="text-sm text-bb-muted">Step 2</p>
+              <p class="mt-2 font-display text-2xl">Ape in early</p>
+              <p class="mt-2 text-sm text-bb-muted">Be one of the first to invest, and lock in lifetime fees.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
+              <p class="text-sm text-bb-muted">Step 3</p>
+              <p class="mt-2 font-display text-2xl">Ride the hype</p>
+              <p class="mt-2 text-sm text-bb-muted">Trade on the bonding curve until it graduates to a DEX.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="why" class="mx-auto max-w-6xl px-6 pb-24">
+        <div class="grid gap-8 md:grid-cols-2">
+          <div class="glass rounded-3xl p-8">
+            <p class="text-sm uppercase tracking-[0.3em] text-bb-yellow">Why creators win</p>
+            <h3 class="mt-3 font-display text-3xl">Turn views into recurring royalties.</h3>
+            <p class="mt-4 text-bb-muted">
+              Turn your clout into capital. Creators earn ~1% of every trade forever. Your viral moments become
+              long-term income, not just a fleeting
+              spike.
+            </p>
+          </div>
+          <div class="glass rounded-3xl p-8">
+            <p class="text-sm uppercase tracking-[0.3em] text-bb-yellow">Why fans win</p>
+            <h3 class="mt-3 font-display text-3xl">Be more than a spectator — own the moment.</h3>
+            <p class="mt-4 text-bb-muted">
+              Invest in Bangers and grow with the hype. Own a piece of the next viral moment and support your favorite
+              creators directly
+              flex.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="waitlist" class="mx-auto max-w-6xl px-6 pb-28">
+        <div class="relative overflow-hidden rounded-3xl bg-bb-yellow p-10 text-black md:p-14">
+          <div class="absolute -right-12 -top-16 h-48 w-48 rounded-full bg-white/30 blur-3xl"></div>
+          <div class="relative z-10 grid gap-8 md:grid-cols-[1.2fr_0.8fr]">
+            <div>
+              <p class="text-xs uppercase tracking-[0.3em]">Join the Telegram</p>
+              <h2 class="mt-3 font-display text-3xl md:text-4xl">Be first. Be bold. Be rewarded.</h2>
+              <p class="mt-4 text-sm text-black/80">
+                The alpha drops in our channel first.
+              </p>
+            </div>
+            <div class="grid content-start gap-4">
+              <a id="cta-footer" href="https://t.me/bangerboyofficial" target="_blank" rel="noopener"
+                class="rounded-lg bg-black px-4 py-3 text-center text-sm font-semibold text-white transition hover:-translate-y-0.5">
+                Join our Telegram
+              </a>
+              <p class="text-sm text-black">No spam. No bullshit. Just alpha.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="relative z-10 border-t border-white/10">
+      <div class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-6 py-8 text-sm text-bb-muted">
+        <p>© 2026 BangerBoy 🧨. The Stock Market for Viral Contents.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const confettiBurst = () => {
+      confetti({
+        particleCount: 120,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ["#FBBE2F", "#E42328", "#016FB9", "#FFFFFF"],
+      });
+    };
+
+    document.getElementById("cta-hero").addEventListener("click", () => {
+      confettiBurst();
+    });
+
+    document.getElementById("cta-footer").addEventListener("click", () => {
+      confettiBurst();
+    });
+
+    const mcEl = document.getElementById("mc-value");
+    const holdersEl = document.getElementById("holders-value");
+    const volumeEl = document.getElementById("volume-value");
+
+    const formatMoney = (value) =>
+      value.toLocaleString("en-US", { maximumFractionDigits: 0 });
+
+    const formatCompact = (value) => {
+      if (value >= 1000000) return `$${(value / 1000000).toFixed(1)}M`;
+      if (value >= 1000) return `$${Math.round(value / 1000)}k`;
+      return `$${value}`;
+    };
+
+    if (mcEl) {
+      let mcValue = Number(mcEl.dataset.mc || 154000);
+      let holdersValue = Number(holdersEl?.dataset.holders || 1284);
+      let volumeValue = Number(volumeEl?.dataset.volume || 92000);
+
+      const tickMc = () => {
+        mcValue += Math.floor(120 + Math.random() * 520);
+        mcEl.textContent = `$${formatMoney(mcValue)}`;
+        mcEl.classList.add("number-pop");
+        setTimeout(() => mcEl.classList.remove("number-pop"), 350);
       };
 
-      document.getElementById("cta-hero").addEventListener("click", () => {
-        confettiBurst();
-      });
+      const tickHolders = () => {
+        holdersValue += Math.floor(1 + Math.random() * 6);
+        if (holdersEl) {
+          holdersEl.textContent = holdersValue.toLocaleString("en-US");
+          holdersEl.classList.add("number-pop");
+          setTimeout(() => holdersEl.classList.remove("number-pop"), 350);
+        }
+      };
 
-      document.getElementById("cta-footer").addEventListener("click", () => {
-        confettiBurst();
-      });
-    </script>
-  </body>
+      const tickVolume = () => {
+        volumeValue += Math.floor(500 + Math.random() * 2400);
+        if (volumeEl) {
+          volumeEl.textContent = formatCompact(volumeValue);
+          volumeEl.classList.add("number-pop");
+          setTimeout(() => volumeEl.classList.remove("number-pop"), 350);
+        }
+      };
+
+      setInterval(tickMc, 2400);
+      setInterval(tickHolders, 4000);
+      setInterval(tickVolume, 3000);
+    }
+  </script>
+</body>
+
 </html>
