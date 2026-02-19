@@ -16,7 +16,7 @@
 
 ## 4. Product Snapshot
 - Search any post or keyword
-- One-click invest or pioneer a new banger
+- One-click invest or create a new banger
 - Portfolio dashboard with P&L and royalties
 
 ## 5. How It Works
@@ -35,8 +35,8 @@
 - Wedge: viral posts as a new asset class
 
 ## 8. Business Model
-- 2% fee per trade
-- 1.0% platform, 0.9% creator, 0.1% pioneer
+- 2.5% fee per trade
+- 1.0% platform, 1.0% creator, 0.25% top holders, 0.25% depth pool
 - Points & airdrops drive engagement
 
 ## 9. Traction (Pre-Seed)
@@ -47,7 +47,7 @@
 ## 10. Go-To-Market
 - Creator onboarding + viral launch moments
 - Social-native distribution (X + TikTok)
-- Pioneer incentives to reward discovery
+- Top holder incentives to reward discovery
 
 ## 11. Competition
 - Creator platforms = one-off payments
