@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BangerBoy Teaser - High Stakes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;900&family=Space+Grotesk:wght@700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bangerYellow: '#FBBE2F',
+            bangerRed: '#E42328',
+            bangerDark: '#0F0F0F',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #050505;
+      color: #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: 'Inter', sans-serif;
+    }
+
+    #video-container {
+      width: 100%;
+      max-width: 1000px;
+      aspect-ratio: 16 / 9;
+      background: #0F0F0F;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      pointer-events: none;
+      visibility: hidden;
+      transition: opacity 0.4s ease;
+      z-index: 10;
+    }
+
+    .scene.active {
+      opacity: 1;
+      pointer-events: auto;
+      visibility: visible;
+    }
+
+    .num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .text-huge {
+      font-size: 2.75rem;
+      font-weight: 900;
+      line-height: 1.15;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+    }
+
+    .text-logo {
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .anim-pop {
+      animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2) forwards;
+    }
+
+    @keyframes pop {
+      0% {
+        transform: scale(0.6);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* SVG Cursor Styling */
+    #cursor-wrapper {
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      z-index: 999;
+      pointer-events: none;
+      opacity: 0;
+      transition: transform 0.6s cubic-bezier(0.2, 0, 0.2, 1);
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+    }
+
+    .cursor-click {
+      animation: click-effect 0.3s ease;
+    }
+
+    @keyframes click-effect {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(0.8);
+      }
+
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .mock-tweet {
+      background: #000;
+      border: 1px solid #333;
+      border-radius: 16px;
+      padding: 1.5rem;
+      width: 520px;
+      text-align: left;
+      position: relative;
+    }
+
+    .btn-buy-stocks {
+      background: #FBBE2F;
+      color: #000;
+      font-weight: 900;
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      box-shadow: 0 4px 15px rgba(251, 190, 47, 0.3);
+    }
+
+    .btn-buy-stocks.active-click {
+      transform: scale(0.92);
+      background: #e5ac2a;
+      box-shadow: 0 2px 5px rgba(251, 190, 47, 0.2);
+    }
+
+    .grid-bg {
+      position: absolute;
+      inset: 0;
+      background-size: 60px 60px;
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+      z-index: 1;
+    }
+
+    #controls {
+      width: 100%;
+      max-width: 1000px;
+      background: #111;
+      padding: 12px 25px;
+      border: 1px solid #333;
+      border-top: none;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    #progress-bar {
+      flex-grow: 1;
+      height: 6px;
+      background: #222;
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+    }
+
+    #progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: #FBBE2F;
+      width: 0%;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="video-container">
+    <div class="grid-bg"></div>
+
+    <!-- Custom SVG Cursor to ensure visibility -->
+    <div id="cursor-wrapper">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M5.5 3.21V20.87C5.5 21.43 6.13 21.75 6.58 21.41L11.08 18.04C11.34 17.85 11.66 17.75 11.98 17.75H17.5C18.05 17.75 18.5 17.3 18.5 16.75V4.25C18.5 3.7 18.05 3.25 17.5 3.25H6.5C5.95 3.25 5.5 3.7 5.5 4.25V3.21Z"
+          fill="white" stroke="black" stroke-width="1.5" />
+        <path d="M5.5 3.21L18.5 16.75M5.5 3.21V20.87L11.98 17.75H17.5V4.25H5.5" fill="white" />
+        <!-- Classic Pointer Shape -->
+        <path d="M4 2L4 18.5L8.5 14.5H15L4 2Z" fill="white" stroke="black" stroke-width="1" />
+      </svg>
+    </div>
+
+    <!-- Scene 1: The Hook -->
+    <div id="scene-1" class="scene">
+      <h2 id="s1-t1" class="text-huge opacity-0">You spot a banger tweet 👀</h2>
+      <h2 id="s1-t2" class="text-huge opacity-0 mt-2">You watch it blow up.</h2>
+
+      <div id="s1-stats"
+        class="flex gap-10 mt-8 opacity-0 bg-zinc-900/95 px-8 py-6 rounded-2xl border border-white/10 shadow-2xl">
+        <div class="flex flex-col items-center">
+          <i class="fa-regular fa-heart text-zinc-500 mb-2"></i>
+          <span class="text-3xl font-black text-white"><span class="num" id="s1-likes">0</span><span
+              class="text-xl">M</span></span>
+          <span class="text-[10px] text-zinc-500 uppercase tracking-widest mt-1">Likes</span>
+        </div>
+        <div class="flex flex-col items-center border-l border-zinc-800 pl-10">
+          <i class="fa-solid fa-retweet text-zinc-500 mb-2"></i>
+          <span class="text-3xl font-black text-white"><span class="num" id="s1-retweets">0</span><span
+              class="text-xl">K</span></span>
+          <span class="text-[10px] text-zinc-500 uppercase tracking-widest mt-1">Retweets</span>
+        </div>
+        <div class="flex flex-col items-center border-l border-zinc-800 pl-10">
+          <i class="fa-regular fa-comment text-zinc-500 mb-2"></i>
+          <span class="text-3xl font-black text-white"><span class="num" id="s1-comments">0</span><span
+              class="text-xl">K</span></span>
+          <span class="text-[10px] text-zinc-500 uppercase tracking-widest mt-1">Comments</span>
+        </div>
+      </div>
+
+      <h2 id="s1-t3" class="text-6xl font-black text-bangerRed mt-12 opacity-0 italic tracking-tighter uppercase">BUT
+        YOU GET $<span class="num">0</span>.</h2>
+    </div>
+
+    <!-- Scene 2: The Proof -->
+    <div id="scene-2" class="scene">
+      <h2 id="s2-t1" class="text-4xl font-black z-20 px-8 opacity-0 tracking-tight">THE INTERNET IS ASKING FOR IT.</h2>
+      <div id="montage-container" class="absolute inset-0 pointer-events-none"></div>
+    </div>
+
+    <!-- Scene 3: Transition -->
+    <div id="scene-3" class="scene bg-bangerYellow">
+      <h2 id="s3-t1" class="text-huge italic text-bangerDark opacity-0">What if...</h2>
+    </div>
+
+    <!-- Scene 4: Value Prop -->
+    <div id="scene-4" class="scene">
+      <h2 class="text-3xl font-black mb-10 opacity-0" id="s4-t1">You could <span class="text-bangerYellow">OWN</span>
+        the hype?</h2>
+
+      <div class="mock-tweet opacity-0" id="s4-tweet">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Elon"
+              class="w-10 h-10 rounded-full bg-zinc-800" />
+            <div>
+              <div class="font-bold text-white text-sm">Elon Musk <i
+                  class="fa-solid fa-circle-check text-blue-400 text-[10px]"></i></div>
+              <div class="text-zinc-500 text-xs">@elonmusk</div>
+            </div>
+          </div>
+          <button id="s4-buy-btn" class="btn-buy-stocks">BUY STOCKS</button>
+        </div>
+        <p class="text-white text-base mb-6 leading-relaxed">Next I’m buying Coca-Cola to put the cocaine back in</p>
+        <div class="flex justify-between text-zinc-500 text-[11px] border-t border-zinc-800 pt-4 px-1">
+          <span><i class="fa-regular fa-comment mr-1.5"></i> <span class="text-white font-bold">169K</span></span>
+          <span><i class="fa-solid fa-retweet mr-1.5"></i> <span class="text-white font-bold">756K</span></span>
+          <span><i class="fa-regular fa-heart mr-1.5"></i> <span class="text-white font-bold">4.2M</span></span>
+          <span><i class="fa-regular fa-bookmark mr-1.5"></i> <span class="text-white font-bold">21K</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 5: Reveal -->
+    <div id="scene-5" class="scene bg-bangerYellow">
+      <h2 id="s5-t1" class="text-lg font-bold opacity-0 tracking-[0.4em] text-black/60 uppercase">INTRODUCING</h2>
+      <h1 id="s5-logo" class="text-logo text-black opacity-0 mt-4">BANGERBOY 🧨</h1>
+    </div>
+
+    <!-- Scene 6: Mechanics -->
+    <div id="scene-6" class="scene">
+      <div class="flex flex-col gap-6">
+        <h2 id="s6-t1" class="text-2xl font-black opacity-0 bg-white text-black px-6 py-2 transform -rotate-1">The
+          Capital Market for Viral Content</h2>
+        <div class="space-y-3">
+          <h2 id="s6-t2" class="text-4xl font-black opacity-0 text-bangerRed">Creators Earn 0.9% Royalties</h2>
+          <h2 id="s6-t3" class="text-4xl font-black opacity-0 text-bangerYellow">Holders Earn 0.1% Dividends</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scene 7: CTA Blitz -->
+    <div id="scene-7" class="scene">
+      <h2 id="s7-t1" class="text-3xl font-black opacity-0 mb-12 tracking-tighter uppercase">The NASDAQ of Internet
+        Culture</h2>
+      <div class="flex gap-8">
+        <div id="s7-b1" class="text-huge opacity-0">BUY</div>
+        <div id="s7-b2" class="text-huge text-bangerRed opacity-0">SELL</div>
+        <div id="s7-b3" class="text-huge text-bangerYellow opacity-0">EARN</div>
+      </div>
+    </div>
+
+    <!-- Scene 8: Finale -->
+    <div id="scene-8" class="scene bg-bangerDark">
+      <div class="anim-pop">
+        <h1 class="text-logo text-bangerYellow leading-none">BANGERBOY 🧨</h1>
+        <p class="text-2xl font-bold mt-4 text-white/80">Invest in the Hype. Own the Moment.</p>
+        <div class="mt-10 text-zinc-500 font-mono text-xs tracking-[0.3em] uppercase">Coming Soon to Solana</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="controls">
+    <button id="btn-play"
+      class="w-10 h-10 flex items-center justify-center bg-bangerYellow text-bangerDark rounded-full hover:scale-105 transition-transform"><i
+        class="fa-solid fa-play text-sm" id="play-icon"></i></button>
+    <div id="progress-bar">
+      <div id="progress-fill"></div>
+    </div>
+    <div class="text-xs font-mono text-zinc-400 w-24 text-right"><span id="current-time">00.0s</span> / 28.0s</div>
+  </div>
+
+  <script>
+    let isPlaying = false;
+    let currentTime = 0;
+    const totalDuration = 28000;
+    let lastTimestamp;
+
+    const container = document.getElementById('video-container');
+    const playBtn = document.getElementById('btn-play');
+    const playIcon = document.getElementById('play-icon');
+    const progressFill = document.getElementById('progress-fill');
+    const timeDisplay = document.getElementById('current-time');
+    const cursorWrapper = document.getElementById('cursor-wrapper');
+    const montageContainer = document.getElementById('montage-container');
+
+    function animateCounter(id, start, end, duration, currentMs, startTime) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const progress = Math.min((currentMs - startTime) / duration, 1);
+      if (progress < 0) { el.innerText = start; return; }
+      const currentVal = (start + (end - start) * progress).toFixed(1);
+      el.innerText = currentVal;
+    }
+
+    function updateUI(ms) {
+      const progress = (ms / totalDuration) * 100;
+      progressFill.style.width = `${Math.min(progress, 100)}%`;
+      timeDisplay.innerText = `${(ms / 1000).toFixed(1)}s`;
+
+      document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.anim-pop').forEach(el => el.classList.remove('anim-pop'));
+      document.getElementById('s4-buy-btn').classList.remove('active-click');
+
+      // Default cursor state
+      cursorWrapper.style.opacity = "0";
+      cursorWrapper.classList.remove('cursor-click');
+
+      if (ms < 7500) {
+        document.getElementById('scene-1').classList.add('active');
+        if (ms > 300) document.getElementById('s1-t1').classList.add('anim-pop');
+        if (ms > 1200) document.getElementById('s1-t2').classList.add('anim-pop');
+        if (ms > 2200) {
+          document.getElementById('s1-stats').classList.add('anim-pop');
+          animateCounter('s1-likes', 0, 4.2, 1200, ms, 2200);
+          animateCounter('s1-retweets', 0, 756, 1200, ms, 2200);
+          animateCounter('s1-comments', 0, 169, 1200, ms, 2200);
+        }
+        if (ms > 4800) document.getElementById('s1-t3').classList.add('anim-pop');
+      }
+      else if (ms < 12000) {
+        document.getElementById('scene-2').classList.add('active');
+        if (ms > 7800) document.getElementById('s2-t1').classList.add('anim-pop');
+        updateMontage(ms);
+      }
+      else if (ms < 14000) {
+        document.getElementById('scene-3').classList.add('active');
+        document.getElementById('s3-t1').classList.add('anim-pop');
+        montageContainer.innerHTML = '';
+      }
+      else if (ms < 19000) {
+        document.getElementById('scene-4').classList.add('active');
+        if (ms > 14100) document.getElementById('s4-t1').classList.add('anim-pop');
+
+        if (ms > 15200) {
+          const tweet = document.getElementById('s4-tweet');
+          tweet.classList.add('anim-pop');
+
+          // Interaction: Move cursor to button
+          if (ms > 16200 && ms < 18800) {
+            cursorWrapper.style.opacity = "1";
+            const btn = document.getElementById('s4-buy-btn');
+            const rect = btn.getBoundingClientRect();
+            const contRect = container.getBoundingClientRect();
+
+            // Center of the button relative to video container
+            const targetX = rect.left - contRect.left + (rect.width / 2);
+            const targetY = rect.top - contRect.top + (rect.height / 2);
+
+            cursorWrapper.style.transform = `translate(${targetX}px, ${targetY}px)`;
+
+            if (ms > 17500) {
+              btn.classList.add('active-click');
+              cursorWrapper.classList.add('cursor-click');
+            }
+          }
+        }
+      }
+      else if (ms < 21500) {
+        document.getElementById('scene-5').classList.add('active');
+        if (ms > 19200) document.getElementById('s5-t1').classList.add('anim-pop');
+        if (ms > 20200) document.getElementById('s5-logo').classList.add('anim-pop');
+      }
+      else if (ms < 24500) {
+        document.getElementById('scene-6').classList.add('active');
+        if (ms > 21700) document.getElementById('s6-t1').classList.add('anim-pop');
+        if (ms > 22700) document.getElementById('s6-t2').classList.add('anim-pop');
+        if (ms > 23700) document.getElementById('s6-t3').classList.add('anim-pop');
+      }
+      else if (ms < 27000) {
+        document.getElementById('scene-7').classList.add('active');
+        if (ms > 24700) document.getElementById('s7-t1').classList.add('anim-pop');
+        if (ms > 25300) document.getElementById('s7-b1').classList.add('anim-pop');
+        if (ms > 25800) document.getElementById('s7-b2').classList.add('anim-pop');
+        if (ms > 26300) document.getElementById('s7-b3').classList.add('anim-pop');
+      }
+      else {
+        document.getElementById('scene-8').classList.add('active');
+      }
+    }
+
+    const montageData = [
+      { t: 8800, x: 5, y: 10, r: -4 }, { t: 8950, x: 68, y: 15, r: 12 },
+      { t: 9100, x: 42, y: 60, r: -2 }, { t: 9250, x: 12, y: 55, r: 15 },
+      { t: 9400, x: 72, y: 65, r: -8 }, { t: 9550, x: 52, y: 12, r: 6 },
+      { t: 9700, x: 2, y: 45, r: -12 }, { t: 9850, x: 78, y: 40, r: 10 },
+      { t: 10000, x: 28, y: 15, r: -5 }, { t: 10150, x: 58, y: 70, r: 4 }
+    ];
+
+    function updateMontage(ms) {
+      montageData.forEach((item, index) => {
+        const id = `montage-item-${index}`;
+        let el = document.getElementById(id);
+        if (ms >= item.t) {
+          if (!el) {
+            el = document.createElement('div');
+            el.id = id;
+            el.className = 'montage-card anim-pop absolute bg-zinc-900 border border-zinc-800 p-3 rounded-lg w-48 shadow-2xl';
+            el.style.left = item.x + '%';
+            el.style.top = item.y + '%';
+            el.style.transform = `rotate(${item.r}deg)`;
+            el.innerHTML = `
+                            <div class="flex gap-2 mb-2 items-center">
+                                <div class="w-4 h-4 rounded-full bg-zinc-700"></div>
+                                <div class="w-12 h-1 bg-zinc-700 rounded-full"></div>
+                            </div>
+                            <div class="w-full h-1 bg-zinc-800 rounded-full mb-1"></div>
+                            <div class="w-2/3 h-1 bg-zinc-800 rounded-full"></div>
+                        `;
+            montageContainer.appendChild(el);
+          }
+        } else if (el) {
+          el.remove();
+        }
+      });
+    }
+
+    function animate(timestamp) {
+      if (!lastTimestamp) lastTimestamp = timestamp;
+      const delta = timestamp - lastTimestamp;
+      lastTimestamp = timestamp;
+      if (isPlaying) {
+        currentTime += delta;
+        if (currentTime >= totalDuration) { currentTime = totalDuration; togglePlay(); }
+        updateUI(currentTime);
+      }
+      requestAnimationFrame(animate);
+    }
+
+    function togglePlay() {
+      isPlaying = !isPlaying;
+      if (currentTime >= totalDuration) {
+        currentTime = 0;
+        montageContainer.innerHTML = '';
+      }
+      playIcon.className = isPlaying ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+    }
+
+    playBtn.addEventListener('click', togglePlay);
+    document.getElementById('progress-bar').addEventListener('click', (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const percent = (e.clientX - rect.left) / rect.width;
+      currentTime = percent * totalDuration;
+      montageContainer.innerHTML = '';
+      updateUI(currentTime);
+    });
+    requestAnimationFrame(animate);
+  </script>
+</body>
+
+</html>
