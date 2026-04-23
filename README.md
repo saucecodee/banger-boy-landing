@@ -1,7 +1,7 @@
-# BangerBoy — Pitch Deck
+# BangerMarket — pitch deck
 
 ## 1. Title
-- BangerBoy: The Stock Market for Viral Content
+- BangerMarket: The Stock Market for Viral Content
 - Tagline: Invest in the Hype. Own the Moment.
 
 ## 2. Problem
@@ -52,7 +52,7 @@
 ## 11. Competition
 - Creator platforms = one-off payments
 - Meme tokens = fragmented & duplicated
-- BangerBoy = 1 post → 1 asset + royalties
+- BangerMarket = 1 post → 1 asset + royalties
 
 ## 12. Roadmap + Ask
 - MVP: Twitter-only launch
